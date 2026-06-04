@@ -1,40 +1,48 @@
+import { BarChart3, Clock, Target, TrendingUp } from "lucide-react";
+import PageHeader from "../components/PageHeader";
+import EmptyStateCard from "../components/EmptyStateCard";
+import { aiInsights } from "../data/mockData";
+
 export default function Analytics() {
   return (
-    <section className="twoColumns">
-      <div className="card largeCard">
-        <h2>Análise de campanha</h2>
-        <p>Diagnóstico simulado de performance para melhoria contínua.</p>
+    <section>
+      <PageHeader
+        eyebrow="Analytics"
+        title="Dados claros para decisões melhores."
+        description="Acompanhe métricas de campanha, conteúdo, produtos e creators em um único lugar."
+      />
 
-        <div className="analyticsList">
-          <div>
-            <strong>Retenção inicial</strong>
-            <span>Baixa nos 3 primeiros segundos</span>
-          </div>
+      <div className="content-grid">
+        <EmptyStateCard
+          icon={<TrendingUp size={24} />}
+          title="Crescimento"
+          description="Acompanhe evolução de receita, conversão e engajamento."
+        />
 
-          <div>
-            <strong>Clareza do CTA</strong>
-            <span>Moderada</span>
-          </div>
+        <EmptyStateCard
+          icon={<Target size={24} />}
+          title="Oportunidades"
+          description="Identifique produtos, canais e campanhas com maior potencial."
+        />
 
-          <div>
-            <strong>Melhor horário</strong>
-            <span>19h às 21h</span>
-          </div>
-
-          <div>
-            <strong>Recomendação</strong>
-            <span>Iniciar o vídeo com uma pergunta direta sobre a dor.</span>
-          </div>
-        </div>
+        <EmptyStateCard
+          icon={<Clock size={24} />}
+          title="Tempo economizado"
+          description="Meça o impacto das automações na rotina do creator."
+        />
       </div>
 
-      <div className="card centerCard">
-        <h2>Score de oportunidade</h2>
-        <div className="scoreCircle">86</div>
-        <p>
-          Produto com boa aderência ao público e alto potencial para creators de
-          nicho.
-        </p>
+      <div className="os-panel">
+        <h2>Insights acionáveis</h2>
+
+        <div className="insight-list">
+          {aiInsights.map((item) => (
+            <div className="insight-row" key={item}>
+              <BarChart3 size={18} />
+              <p>{item}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -1,93 +1,113 @@
 import { useState } from "react";
-import { Wand2 } from "lucide-react";
-import { products } from "../data/mockData";
+import { Sparkles, Wand2 } from "lucide-react";
+import PageHeader from "../components/PageHeader";
+import { campaigns, products } from "../data/mockData";
 
 export default function Campaigns() {
   const [generated, setGenerated] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  function handleGenerate() {
+  function generateCampaign() {
     setLoading(true);
     setGenerated(false);
 
     setTimeout(() => {
       setLoading(false);
       setGenerated(true);
-    }, 1200);
+    }, 900);
   }
 
   return (
-    <section className="twoColumns">
-      <div className="card">
-        <h2>Gerador de campanha</h2>
-        <p>Simule a criação de uma campanha usando IA generativa.</p>
+    <section>
+      <PageHeader
+        eyebrow="Campanhas"
+        title="Crie campanhas inteligentes para creators e afiliados."
+        description="Simule geração de roteiros, CTAs, canais recomendados e otimizações automáticas."
+      />
 
-        <label>Produto</label>
-        <select>
-          {products.map((product) => (
-            <option key={product.id}>{product.name}</option>
-          ))}
-        </select>
+      <div className="two-columns">
+        <div className="os-panel">
+          <h2>Gerador de campanha IA</h2>
 
-        <label>Canal</label>
-        <select>
-          <option>Instagram Reels</option>
-          <option>TikTok</option>
-          <option>YouTube Shorts</option>
-        </select>
+          <label>Produto</label>
+          <select>
+            {products.map((product) => (
+              <option key={product.name}>{product.name}</option>
+            ))}
+          </select>
 
-        <label>Objetivo</label>
-        <select>
-          <option>Aumentar conversão</option>
-          <option>Gerar reconhecimento</option>
-          <option>Recuperar leads</option>
-        </select>
+          <label>Canal principal</label>
+          <select>
+            <option>Instagram Reels</option>
+            <option>TikTok</option>
+            <option>YouTube Shorts</option>
+          </select>
 
-        <button className="primaryButton fullButton" onClick={handleGenerate}>
-          <Wand2 size={18} />
-          Gerar campanha com IA
-        </button>
+          <label>Objetivo</label>
+          <select>
+            <option>Aumentar conversão</option>
+            <option>Gerar reconhecimento</option>
+            <option>Recuperar leads</option>
+          </select>
+
+          <button className="primary-action" onClick={generateCampaign}>
+            <Wand2 size={18} />
+            Gerar campanha
+          </button>
+        </div>
+
+        <div className="os-panel">
+          <h2>Resultado gerado</h2>
+
+          {!generated && !loading && (
+            <div className="empty-result">
+              <Sparkles size={26} />
+              <p>Clique em gerar campanha para visualizar a simulação.</p>
+            </div>
+          )}
+
+          {loading && (
+            <div className="empty-result purple">
+              IA analisando produto, público, canal e tendência...
+            </div>
+          )}
+
+          {generated && (
+            <div className="generated-box">
+              <h3>Gancho</h3>
+              <p>“Você trabalha muito, mas sente que sua operação não cresce?”</p>
+
+              <h3>Roteiro</h3>
+              <p>
+                Comece mostrando a dor do creator, apresente o produto como
+                solução prática e finalize com uma chamada direta.
+              </p>
+
+              <h3>CTA</h3>
+              <p>“Acesse agora e organize sua operação em poucos minutos.”</p>
+
+              <h3>Hashtags</h3>
+              <p>#creator #marketingdigital #afiliados #conteudo</p>
+            </div>
+          )}
+        </div>
       </div>
 
-      <div className="card resultCard">
-        <h2>Campanha gerada</h2>
+      <div className="os-panel">
+        <h2>Campanhas ativas</h2>
 
-        {!loading && !generated && (
-          <div className="emptyState">
-            Clique em gerar campanha para visualizar a simulação.
-          </div>
-        )}
+        <div className="table-list">
+          {campaigns.map((campaign) => (
+            <div className="table-row" key={campaign.name}>
+              <div>
+                <strong>{campaign.name}</strong>
+                <span>{campaign.channel} · Conversão {campaign.conversion}</span>
+              </div>
 
-        {loading && (
-          <div className="emptyState purple">
-            IA analisando produto, público, canal e tendência...
-          </div>
-        )}
-
-        {generated && (
-          <div className="generatedContent">
-            <h3>Gancho</h3>
-            <p>“Você trabalha muito, mas sente que seu dinheiro nunca sobra?”</p>
-
-            <h3>Roteiro</h3>
-            <p>
-              Abra com uma dor real, apresente uma solução simples e mostre como
-              o produto ajuda o público a dar o primeiro passo.
-            </p>
-
-            <h3>Legenda</h3>
-            <p>
-              Organizar sua vida financeira pode ser mais simples do que parece.
-              Comece hoje com um método prático e direto.
-            </p>
-
-            <h3>CTA</h3>
-            <p>Clique no link e conheça o passo a passo completo.</p>
-
-            <h3>Hashtags</h3>
-            <p>#financas #rendadigital #educacaofinanceira #creator</p>
-          </div>
-        )}
+              <b>{campaign.status}</b>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

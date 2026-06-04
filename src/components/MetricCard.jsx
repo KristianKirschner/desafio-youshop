@@ -1,9 +1,13 @@
-export default function MetricCard({ title, value, description }) {
+export default function MetricCard({ title, value, change, subtitle }) {
   return (
-    <div className="metricCard">
+    <div className="os-metric-card">
       <p>{title}</p>
       <strong>{value}</strong>
-      <span>{description}</span>
+
+      <div>
+        <span>{change}</span>
+        <small>{subtitle}</small>
+      </div>
     </div>
   );
 }

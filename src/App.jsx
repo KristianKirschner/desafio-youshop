@@ -1,29 +1,31 @@
 import { Route, Routes } from "react-router-dom";
-import DashboardLayout from "./layouts/DashboardLayout";
 import Landing from "./pages/Landing";
+import AppLayout from "./layouts/AppLayout";
 import Dashboard from "./pages/Dashboard";
-import Products from "./pages/Products";
+import Content from "./pages/Content";
 import Campaigns from "./pages/Campaigns";
-import Trends from "./pages/Trends";
 import Analytics from "./pages/Analytics";
-import Assistant from "./pages/Assistant";
-import Shield from "./pages/Shield";
-import Report from "./pages/Report";
+import Affiliates from "./pages/Affiliates";
+import Finance from "./pages/Finance";
+import Automations from "./pages/Automations";
+import Integrations from "./pages/Integrations";
+import Settings from "./pages/Settings";
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
 
-      <Route element={<DashboardLayout />}>
+      <Route element={<AppLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/products" element={<Products />} />
+        <Route path="/content" element={<Content />} />
         <Route path="/campaigns" element={<Campaigns />} />
-        <Route path="/trends" element={<Trends />} />
         <Route path="/analytics" element={<Analytics />} />
-        <Route path="/assistant" element={<Assistant />} />
-        <Route path="/shield" element={<Shield />} />
-        <Route path="/report" element={<Report />} />
+        <Route path="/affiliates" element={<Affiliates />} />
+        <Route path="/finance" element={<Finance />} />
+        <Route path="/automations" element={<Automations />} />
+        <Route path="/integrations" element={<Integrations />} />
+        <Route path="/settings" element={<Settings />} />
       </Route>
     </Routes>
   );
